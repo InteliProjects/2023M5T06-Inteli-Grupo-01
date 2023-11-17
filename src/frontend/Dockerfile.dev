@@ -1,0 +1,9 @@
+# Etapa de compilação
+FROM node:alpine AS build
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm i
+CMD ["npm", "run", "dev"]

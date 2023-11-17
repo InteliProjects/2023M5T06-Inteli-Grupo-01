@@ -1,0 +1,21 @@
+version: '3'
+services:
+    nodejs:
+        image: node:latest
+        working_dir: /app
+        volumes:
+            - ./:/app
+        ports:
+            - '3000:3000'
+        depends_on:
+            - mysql
+        command: sh -c "npm install && npm run dev"
+
+    mysql:
+        image: mysql:latest
+        container_name: mysql_db
+        environment:
+            MYSQL_ROOT_PASSWORD: omppass
+            MYSQL_DATABASE: dbomp
+        ports:
+            - '3306:3306'

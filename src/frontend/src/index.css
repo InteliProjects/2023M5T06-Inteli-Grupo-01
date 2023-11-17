@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.bg-inteli-orange {
+    background-color: #ff922b;
+}
+
+.bg-inteli-blue {
+    background-color: #124aed;
+}
+
+::-webkit-scrollbar {
+    width: 0.3em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+}

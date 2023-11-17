@@ -1,0 +1,2900 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "description": "Referência de API do projeto OMP",
+        "version": "1.0.0",
+        "title": "Referência API - OMP",
+        "contact": {
+            "email": "rafael.techio@sou.inteli.edu.br"
+        }
+    },
+    "paths": {
+        "/initiatives": {
+            "get": {
+                "tags": ["Iniciativas"],
+                "summary": "Listagem de Iniciativas",
+                "description": "Retorna uma lista de iniciativas acompanhadas de suas respectivas companies, modules, courses e competences",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filtrar por status",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome, nome do módulo, curso ou empresa",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 2,
+                                    "qtPending": 0,
+                                    "qtAccepted": 2,
+                                    "qtDenied": 0,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 57,
+                                            "name": "Desenvolvimento de jogo digital",
+                                            "status": "ACCEPTED",
+                                            "description": "Criar uma gamificação sobre educação financeira para facilitar e aumentar o engajamento de jovens com este tópico.",
+                                            "observation": null,
+                                            "company": {
+                                                "id": 1,
+                                                "name": "BTG pactual",
+                                                "sector": "Privado",
+                                                "branch": "Financeiro",
+                                                "activity": null,
+                                                "size": null,
+                                                "email": "contato@btg.com.br",
+                                                "avatar": {
+                                                    "file": {
+                                                        "id": null
+                                                    }
+                                                }
+                                            },
+                                            "module": {
+                                                "id": 1,
+                                                "name": "Desenvolvimento de jogo digital",
+                                                "description": null,
+                                                "order": 1,
+                                                "course": {
+                                                    "id": 5,
+                                                    "name": "Ciclo Comum",
+                                                    "order": 1
+                                                }
+                                            },
+                                            "createdAt": "2023-09-13T02:54:14.000Z",
+                                            "updatedAt": "2023-09-17T00:38:06.000Z",
+                                            "competences": []
+                                        },
+                                        {
+                                            "id": 62,
+                                            "name": "Elaboração de aplicação utilizando processamento de linguagem natural",
+                                            "status": "ACCEPTED",
+                                            "description": "Desenvolver uma aplicação baseada em processamento de linguagem natural capaz de monitorar as Campanhas de Marketing e Feedbacks via comentários de clientes.",
+                                            "observation": null,
+                                            "company": {
+                                                "id": 1,
+                                                "name": "BTG pactual",
+                                                "sector": "Privado",
+                                                "branch": "Financeiro",
+                                                "activity": null,
+                                                "size": null,
+                                                "email": "contato@btg.com.br",
+                                                "avatar": {
+                                                    "file": {
+                                                        "id": null
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Iniciativas"],
+                "summary": "Criação de Iniciativa",
+                "description": "Criar uma iniciativa",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome da iniciativa"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição da iniciativa"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação da iniciativa"
+                                    },
+                                    "companyId": {
+                                        "type": "integer",
+                                        "description": "ID da empresa associada à iniciativa"
+                                    },
+                                    "moduleId": {
+                                        "type": "integer",
+                                        "description": "ID do módulo associado à iniciativa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 190,
+                                    "name": "teste",
+                                    "status": "PENDING",
+                                    "description": "descricao",
+                                    "observation": "teste",
+                                    "company": {
+                                        "id": 1
+                                    },
+                                    "module": {
+                                        "id": 1
+                                    },
+                                    "createdAt": "2023-09-22T07:15:50.000Z",
+                                    "updatedAt": "2023-09-22T07:15:50.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/initiatives/{id}": {
+            "patch": {
+                "tags": ["Iniciativas"],
+                "summary": "Edição de iciativa",
+                "description": "Edita apenas os campos enviados de uma iniciativa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da iniciativa a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome da iniciativa"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição da iniciativa"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação da iniciativa"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "Status da iniciativa"
+                                    },
+                                    "companyId": {
+                                        "type": "integer",
+                                        "description": "ID da empresa associada à iniciativa"
+                                    },
+                                    "moduleId": {
+                                        "type": "integer",
+                                        "description": "ID do módulo associado à iniciativa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 190,
+                                    "name": "teste",
+                                    "status": "PENDING",
+                                    "description": "descricao",
+                                    "observation": "teste",
+                                    "company": {
+                                        "id": 1
+                                    },
+                                    "module": {
+                                        "id": 1
+                                    },
+                                    "createdAt": "2023-09-22T07:15:50.000Z",
+                                    "updatedAt": "2023-09-22T07:15:50.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Iniciativas"],
+                "summary": "Deletar uma iniciativa",
+                "description": "Deleta uma iniciativa específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da iniciativa a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/initiatives/{id}/competences": {
+            "post": {
+                "tags": ["Iniciativas"],
+                "summary": "Relacionar competências",
+                "description": "Cria relações de uma iniciativa com competências no banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da iniciativa a relacionar competências",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "value": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/initiatives/{initiativeId}/competences/{competenceId}": {
+            "delete": {
+                "tags": ["Iniciativas"],
+                "summary": "Deletar relacionamentos de iniciativas com competências",
+                "description": "Deleta a relação de uma iniciativa com uma competência no banco de dados",
+                "parameters": [
+                    {
+                        "name": "initiativeId",
+                        "in": "path",
+                        "description": "ID da iniciativa onde a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "competenceId",
+                        "in": "path",
+                        "description": "ID da competência que a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/projects": {
+            "get": {
+                "tags": ["Projetos"],
+                "summary": "Listagem de Projetos",
+                "description": "Retorna uma lista de projetos acompanhadas de suas respectivas companies, modules, courses e competences",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filtrar por status",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome, nome do módulo, curso, empresa ou turma",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 14,
+                                            "name": "Gamificação AMBEV",
+                                            "description": "Gamificação temática Saúde Integral, Baixo engajamento no treinamento tradicional sobre o tema Diversidade e Inclusão.",
+                                            "observation": null,
+                                            "status": "COMPLETED",
+                                            "module": {
+                                                "id": 1,
+                                                "name": "Desenvolvimento de jogo digital",
+                                                "order": 1,
+                                                "course": {
+                                                    "id": 5,
+                                                    "name": "Ciclo Comum",
+                                                    "order": 1
+                                                }
+                                            },
+                                            "company": {
+                                                "id": 33,
+                                                "name": "Ambev",
+                                                "sector": "Privado",
+                                                "branch": "Bebidas",
+                                                "activity": null,
+                                                "size": null,
+                                                "email": "@ambev.com.br"
+                                            },
+                                            "tapi": {
+                                                "file": {
+                                                    "id": null
+                                                }
+                                            },
+                                            "agreement": {
+                                                "file": {
+                                                    "id": null
+                                                }
+                                            },
+                                            "class": {
+                                                "id": 11,
+                                                "name": "Turma 1 - 2022.1",
+                                                "status": "COMPLETED",
+                                                "studentQuantity": 36
+                                            },
+                                            "initiative": {
+                                                "id": 9
+                                            },
+                                            "createdAt": "2023-09-12T18:09:58.000Z",
+                                            "updatedAt": "2023-09-12T18:09:58.000Z",
+                                            "teachers": [
+                                                {
+                                                    "project": {
+                                                        "id": 14
+                                                    },
+                                                    "id": 4,
+                                                    "name": "Professor Teste",
+                                                    "observation": null,
+                                                    "role": "Orientador",
+                                                    "createdAt": "2023-09-18T15:49:38.000Z"
+                                                }
+                                            ],
+                                            "competences": [
+                                                {
+                                                    "project": {
+                                                        "id": 14
+                                                    },
+                                                    "id": 6,
+                                                    "name": "Complexidade",
+                                                    "description": null,
+                                                    "value": 8,
+                                                    "createdAt": "2023-09-18T15:51:35.000Z"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Projetos"],
+                "summary": "Criação de Projeto",
+                "description": "Criar um projeto",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do projeto"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição do projeto"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação do projeto"
+                                    },
+                                    "companyId": {
+                                        "type": "integer",
+                                        "description": "ID da empresa associada ao projeto"
+                                    },
+                                    "moduleId": {
+                                        "type": "integer",
+                                        "description": "ID do módulo associado ao projeto"
+                                    },
+                                    "classId": {
+                                        "type": "integer",
+                                        "description": "ID do módulo associado ao projeto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 84,
+                                    "name": "Projeto teste",
+                                    "description": null,
+                                    "observation": "Observação de Teste 4",
+                                    "status": "PENDING",
+                                    "module": {
+                                        "id": 5
+                                    },
+                                    "company": {
+                                        "id": 1
+                                    },
+                                    "tapi": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "agreement": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "class": {
+                                        "id": 11
+                                    },
+                                    "initiative": {
+                                        "id": null
+                                    },
+                                    "createdAt": "2023-09-26T16:16:00.000Z",
+                                    "updatedAt": "2023-09-26T16:16:00.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/projects/{id}": {
+            "patch": {
+                "tags": ["Projetos"],
+                "summary": "Edição de projeto",
+                "description": "Edita apenas os campos enviados de um projeto",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do projeto"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição do projeto"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação do projeto"
+                                    },
+                                    "companyId": {
+                                        "type": "integer",
+                                        "description": "ID da empresa associada ao projeto"
+                                    },
+                                    "moduleId": {
+                                        "type": "integer",
+                                        "description": "ID do módulo associado ao projeto"
+                                    },
+                                    "classId": {
+                                        "type": "integer",
+                                        "description": "ID do módulo associado ao projeto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 84,
+                                    "name": "nome teste",
+                                    "description": null,
+                                    "observation": "Observação de Teste 4",
+                                    "status": "PENDING",
+                                    "module": {
+                                        "id": 5
+                                    },
+                                    "company": {
+                                        "id": 1
+                                    },
+                                    "tapi": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "agreement": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "class": {
+                                        "id": 11
+                                    },
+                                    "initiative": {
+                                        "id": null
+                                    },
+                                    "createdAt": "2023-09-26T16:16:00.000Z",
+                                    "updatedAt": "2023-09-26T16:23:34.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Projetos"],
+                "summary": "Deletar um projeto",
+                "description": "Deleta um projeto específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/projects/{id}/competences": {
+            "post": {
+                "tags": ["Projetos"],
+                "summary": "Relacionar competências",
+                "description": "Cria relações de um projeto com competências no banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto a relacionar competências",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "value": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/competences/{competenceId}": {
+            "delete": {
+                "tags": ["Projetos"],
+                "summary": "Deletar relacionamentos de projetos com competências",
+                "description": "Deleta a relação de um projeto com uma competência no banco de dados",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "ID do projeto onde a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "competenceId",
+                        "in": "path",
+                        "description": "ID da competência que a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/projects/{id}/teachers": {
+            "post": {
+                "tags": ["Projetos"],
+                "summary": "Relacionar professores",
+                "description": "Cria relações de um projeto com professores no banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do projeto a relacionar professores",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "value": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/teachers/{teacherId}": {
+            "delete": {
+                "tags": ["Projetos"],
+                "summary": "Deletar relacionamentos de projetos com professores",
+                "description": "Deleta a relação de um projeto com um professor no banco de dados",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "ID do projeto onde a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "teacherId",
+                        "in": "path",
+                        "description": "ID do professor que a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/prototypes": {
+            "get": {
+                "tags": ["Protótipos"],
+                "summary": "Listagem de Protótipos",
+                "description": "Retorna uma lista de protótipos",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome, nome do projeto, turma, empresa, módulo ou curso",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 2,
+                                            "name": "Amdevs - Jogo \"Memories\"",
+                                            "groupName": "Amdevs",
+                                            "observation": "Grupo 2",
+                                            "project": {
+                                                "id": 14,
+                                                "projectName": "Gamificação AMBEV",
+                                                "projectStatus": "COMPLETED",
+                                                "company": {
+                                                    "id": 33,
+                                                    "name": "Ambev",
+                                                    "sector": "Privado",
+                                                    "branch": "Indústria",
+                                                    "activity": "Bebidas",
+                                                    "size": "Grande porte",
+                                                    "email": "@ambev.com.br"
+                                                },
+                                                "module": {
+                                                    "id": 1,
+                                                    "name": "Desenvolvimento de jogo digital",
+                                                    "order": 1,
+                                                    "course": {
+                                                        "id": 5,
+                                                        "name": "Ciclo Comum",
+                                                        "order": 1
+                                                    }
+                                                },
+                                                "class": {
+                                                    "id": 11,
+                                                    "name": "Turma 1 - 2022.1",
+                                                    "status": "COMPLETED",
+                                                    "studentQuantity": 36
+                                                }
+                                            },
+                                            "githubLink": "https://github.com/2022M1T1/Memories",
+                                            "deployLink": "https://gustavoofdeoliveira.itch.io/memories",
+                                            "createdAt": "2023-09-13T08:09:34.000Z",
+                                            "updatedAt": "2023-09-19T15:10:05.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Protótipos"],
+                "summary": "Criação de Protótipo",
+                "description": "Criar um protótipo",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do protótipo"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação do protótipo"
+                                    },
+                                    "projectId": {
+                                        "type": "integer",
+                                        "description": "Identificação do projeto"
+                                    },
+                                    "groupName": {
+                                        "type": "string",
+                                        "description": "Nome do grupo"
+                                    },
+                                    "githubLink": {
+                                        "type": "string",
+                                        "description": "Link do projeto no github"
+                                    },
+                                    "deployLink": {
+                                        "type": "string",
+                                        "description": "Link do deploy do projeto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 196,
+                                    "name": "teste",
+                                    "groupName": null,
+                                    "observation": null,
+                                    "project": {
+                                        "id": 15
+                                    },
+                                    "githubLink": null,
+                                    "deployLink": null,
+                                    "createdAt": "2023-09-26T17:19:02.000Z",
+                                    "updatedAt": "2023-09-26T17:19:02.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/prototypes/{id}": {
+            "patch": {
+                "tags": ["Protótipos"],
+                "summary": "Edição de protótipo",
+                "description": "Edita apenas os campos enviados de um protótipo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do protótipo a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do protótipo"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação do protótipo"
+                                    },
+                                    "projectId": {
+                                        "type": "integer",
+                                        "description": "Identificação do projeto"
+                                    },
+                                    "groupName": {
+                                        "type": "string",
+                                        "description": "Nome do grupo"
+                                    },
+                                    "githubLink": {
+                                        "type": "string",
+                                        "description": "Link do projeto no github"
+                                    },
+                                    "deployLink": {
+                                        "type": "string",
+                                        "description": "Link do deploy do projeto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 196,
+                                    "name": "teste",
+                                    "groupName": null,
+                                    "observation": null,
+                                    "project": {
+                                        "id": 15
+                                    },
+                                    "githubLink": null,
+                                    "deployLink": null,
+                                    "createdAt": "2023-09-26T17:19:02.000Z",
+                                    "updatedAt": "2023-09-26T17:19:02.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Protótipos"],
+                "summary": "Deletar um protótipo",
+                "description": "Deleta um protótipo específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do protótipo a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/modules": {
+            "get": {
+                "tags": ["Módulos"],
+                "summary": "Listagem de Módulos",
+                "description": "Retorna uma lista de modulos acompanhadas de suas respectivas companies, modules, courses e competences",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome ou nome curso",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "Desenvolvimento de jogo digital",
+                                            "description": null,
+                                            "order": 1,
+                                            "course": {
+                                                "id": 5,
+                                                "name": "Ciclo Comum",
+                                                "observation": "obs",
+                                                "order": 1,
+                                                "createdAt": "2023-09-06T08:59:21.000Z",
+                                                "updatedAt": "2023-09-06T09:07:33.000Z"
+                                            },
+                                            "createdAt": "2023-09-06T09:59:40.000Z",
+                                            "updatedAt": "2023-09-06T09:59:40.000Z",
+                                            "competences": [
+                                                {
+                                                    "module": {
+                                                        "id": 1
+                                                    },
+                                                    "id": 6,
+                                                    "name": "Complexidade",
+                                                    "description": null,
+                                                    "createdAt": "2023-09-18T16:23:28.000Z"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Módulos"],
+                "summary": "Criação de Módulo",
+                "description": "Criar um módulo",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do módulo"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição do módulo"
+                                    },
+                                    "order": {
+                                        "type": "integer",
+                                        "description": "Ordem do módulo (por exemplo, módulo 5 do curso x)"
+                                    },
+                                    "courseId": {
+                                        "type": "integer",
+                                        "description": "ID do curso associado ao módulo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 37,
+                                    "name": "Projetos especiais",
+                                    "description": null,
+                                    "order": 12,
+                                    "course": {
+                                        "id": 4
+                                    },
+                                    "createdAt": "2023-09-26T16:59:45.000Z",
+                                    "updatedAt": "2023-09-26T16:59:45.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/modules/{id}": {
+            "patch": {
+                "tags": ["Módulos"],
+                "summary": "Edição de módulo",
+                "description": "Edita apenas os campos enviados de um módulo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do módulo a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do módulo"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "description": "Descrição do módulo"
+                                    },
+                                    "order": {
+                                        "type": "integer",
+                                        "description": "Ordem do módulo (por exemplo, módulo 5 do curso x)"
+                                    },
+                                    "courseId": {
+                                        "type": "integer",
+                                        "description": "ID do curso associado ao módulo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 37,
+                                    "name": "Projetos especiais",
+                                    "description": null,
+                                    "order": 12,
+                                    "course": {
+                                        "id": 4
+                                    },
+                                    "createdAt": "2023-09-26T16:59:45.000Z",
+                                    "updatedAt": "2023-09-26T16:59:45.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Módulos"],
+                "summary": "Deletar um módulo",
+                "description": "Deleta um módulo específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do módulo a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/modules/{id}/competences": {
+            "post": {
+                "tags": ["Módulos"],
+                "summary": "Relacionar competências",
+                "description": "Cria relações de um módulo com competências no banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do módulo a relacionar competências",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/modules/{moduleId}/competences/{competenceId}": {
+            "delete": {
+                "tags": ["Módulos"],
+                "summary": "Deletar relacionamentos de módulos com competências",
+                "description": "Deleta a relação de um módulo com uma competência no banco de dados",
+                "parameters": [
+                    {
+                        "name": "moduleId",
+                        "in": "path",
+                        "description": "ID do módulo onde a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "competenceId",
+                        "in": "path",
+                        "description": "ID da competência que a relação deve ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/courses": {
+            "get": {
+                "tags": ["Cursos"],
+                "summary": "Listagem de Cursos",
+                "description": "Retorna uma lista de cursos com kpis dos projetos do curso e seus módulos",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "Engenharia de Software",
+                                            "observation": null,
+                                            "order": 2,
+                                            "createdAt": "2023-09-06T08:58:09.000Z",
+                                            "updatedAt": "2023-09-06T09:07:46.000Z",
+                                            "projectsKPIs": {
+                                                "companySectors": [
+                                                    {
+                                                        "name": "Privado",
+                                                        "amount": 5
+                                                    }
+                                                ],
+                                                "companyBranches": [
+                                                    {
+                                                        "name": "Indústria",
+                                                        "amount": 2
+                                                    },
+                                                    {
+                                                        "name": "Serviços",
+                                                        "amount": 3
+                                                    }
+                                                ],
+                                                "companySizes": [
+                                                    {
+                                                        "name": "Grande porte",
+                                                        "amount": 3
+                                                    },
+                                                    {
+                                                        "name": "Pequeno porte",
+                                                        "amount": 2
+                                                    }
+                                                ],
+                                                "companyActivities": [
+                                                    {
+                                                        "name": "Equipamentos eletrônicos",
+                                                        "amount": 2
+                                                    },
+                                                    {
+                                                        "name": "Educação",
+                                                        "amount": 2
+                                                    },
+                                                    {
+                                                        "name": "Tecnologia",
+                                                        "amount": 1
+                                                    }
+                                                ]
+                                            },
+                                            "courses": [
+                                                {
+                                                    "id": 5,
+                                                    "name": "Desenvolvimento de serviços em cloud computing",
+                                                    "description": null,
+                                                    "order": 5,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:07:48.000Z",
+                                                    "updatedAt": "2023-09-06T10:07:48.000Z"
+                                                },
+                                                {
+                                                    "id": 6,
+                                                    "name": "Elaboração de aplicação para dispositivos móveis",
+                                                    "description": null,
+                                                    "order": 6,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:06.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:06.000Z"
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "name": "Implantação de automação com reconhecimento de voz",
+                                                    "description": null,
+                                                    "order": 7,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:14.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:14.000Z"
+                                                },
+                                                {
+                                                    "id": 8,
+                                                    "name": "Projeto de arquitetura de software",
+                                                    "description": null,
+                                                    "order": 8,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:25.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:25.000Z"
+                                                },
+                                                {
+                                                    "id": 9,
+                                                    "name": "Construção de testes automatizados e controle de qusoftware",
+                                                    "description": null,
+                                                    "order": 9,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:35.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:35.000Z"
+                                                },
+                                                {
+                                                    "id": 10,
+                                                    "name": "Concepção de fluxo de entrega continua",
+                                                    "description": null,
+                                                    "order": 10,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:44.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:44.000Z"
+                                                },
+                                                {
+                                                    "id": 11,
+                                                    "name": "Projeto de estrutura e governança para análise de dados",
+                                                    "description": null,
+                                                    "order": 11,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:52.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:52.000Z"
+                                                },
+                                                {
+                                                    "id": 12,
+                                                    "name": "Projetos especiais",
+                                                    "description": null,
+                                                    "order": 12,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:09:02.000Z",
+                                                    "updatedAt": "2023-09-06T10:09:02.000Z"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Cursos"],
+                "summary": "Criação de Curso",
+                "description": "Criar um curso",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do curso"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação do curso"
+                                    },
+                                    "order": {
+                                        "type": "integer",
+                                        "description": "Ordem do curso"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 11,
+                                    "name": "Administração",
+                                    "observation": null,
+                                    "order": 6,
+                                    "createdAt": "2023-09-26T17:11:08.000Z",
+                                    "updatedAt": "2023-09-26T17:11:08.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/courses/{id}": {
+            "patch": {
+                "tags": ["Cursos"],
+                "summary": "Edição de curso",
+                "description": "Edita apenas os campos enviados de um curso",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do curso a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do curso"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Observação do curso"
+                                    },
+                                    "order": {
+                                        "type": "integer",
+                                        "description": "Ordem do curso"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 11,
+                                    "name": "Administração",
+                                    "observation": null,
+                                    "order": 6,
+                                    "createdAt": "2023-09-26T17:11:08.000Z",
+                                    "updatedAt": "2023-09-26T17:11:08.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Cursos"],
+                "summary": "Deletar um curso",
+                "description": "Deleta um curso específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do curso a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/classes": {
+            "get": {
+                "tags": ["Turmas"],
+                "summary": "Listagem de Turmas",
+                "description": "Retorna uma lista de turmas",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome ou nome do curso",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 20,
+                                            "name": "Turma 1 - 2022.1 - ES",
+                                            "status": "CURRENT",
+                                            "studentQuantity": 36,
+                                            "current": {
+                                                "module": {
+                                                    "id": 7,
+                                                    "name": "Implantação de automação com reconhecimento de voz",
+                                                    "order": 7
+                                                }
+                                            },
+                                            "course": {
+                                                "id": 1,
+                                                "name": "Engenharia de Software",
+                                                "order": 2
+                                            },
+                                            "createdAt": "2023-09-12T07:41:36.000Z",
+                                            "updatedAt": "2023-09-12T07:41:36.000Z",
+                                            "modules": [
+                                                {
+                                                    "id": 5,
+                                                    "name": "Desenvolvimento de serviços em cloud computing",
+                                                    "description": null,
+                                                    "order": 5,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:07:48.000Z",
+                                                    "updatedAt": "2023-09-06T10:07:48.000Z",
+                                                    "initiatives": [
+                                                        {
+                                                            "id": 191,
+                                                            "name": "Iniciativa criada pelo front!",
+                                                            "status": "PENDING",
+                                                            "description": "MInha proposta",
+                                                            "observation": "minhas observações",
+                                                            "company": {
+                                                                "id": 7
+                                                            },
+                                                            "module": {
+                                                                "id": 5
+                                                            },
+                                                            "createdAt": "2023-09-22T10:22:03.000Z",
+                                                            "updatedAt": "2023-09-22T10:51:20.000Z"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 6,
+                                                    "name": "Elaboração de aplicação para dispositivos móveis",
+                                                    "description": null,
+                                                    "order": 6,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:06.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:06.000Z",
+                                                    "initiatives": [
+                                                        {
+                                                            "id": 196,
+                                                            "name": "tgtgtgt",
+                                                            "status": "PENDING",
+                                                            "description": "rgtgthhtht",
+                                                            "observation": "rgtgt",
+                                                            "company": {
+                                                                "id": 31
+                                                            },
+                                                            "module": {
+                                                                "id": 6
+                                                            },
+                                                            "createdAt": "2023-09-22T20:14:59.000Z",
+                                                            "updatedAt": "2023-09-22T20:14:59.000Z"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "name": "Implantação de automação com reconhecimento de voz",
+                                                    "description": null,
+                                                    "order": 7,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:14.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:14.000Z",
+                                                    "project": {
+                                                        "id": 79,
+                                                        "name": "Implantação de automação com reconhecimento de voz IBM",
+                                                        "description": "Desenvolvimento de aplicação conjunta ao sistema Watson para reconhecimento de Voz para texto e texto para Voz, com adicional de pesquisa em bases sobre o contexto falado",
+                                                        "observation": null,
+                                                        "status": "CURRENT",
+                                                        "module": {
+                                                            "id": 7
+                                                        },
+                                                        "company": {
+                                                            "id": 41,
+                                                            "name": "IBM"
+                                                        },
+                                                        "tapi": {
+                                                            "file": {
+                                                                "id": null
+                                                            }
+                                                        },
+                                                        "agreement": {
+                                                            "file": {
+                                                                "id": null
+                                                            }
+                                                        },
+                                                        "class": {
+                                                            "id": 20
+                                                        },
+                                                        "initiative": {
+                                                            "id": 72
+                                                        },
+                                                        "createdAt": "2023-09-14T18:17:32.000Z",
+                                                        "updatedAt": "2023-09-14T18:17:32.000Z"
+                                                    },
+                                                    "initiatives": []
+                                                },
+                                                {
+                                                    "id": 8,
+                                                    "name": "Projeto de arquitetura de software",
+                                                    "description": null,
+                                                    "order": 8,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:25.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:25.000Z",
+                                                    "initiatives": []
+                                                },
+                                                {
+                                                    "id": 9,
+                                                    "name": "Construção de testes automatizados e controle de qusoftware",
+                                                    "description": null,
+                                                    "order": 9,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:35.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:35.000Z",
+                                                    "initiatives": []
+                                                },
+                                                {
+                                                    "id": 10,
+                                                    "name": "Concepção de fluxo de entrega continua",
+                                                    "description": null,
+                                                    "order": 10,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:44.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:44.000Z",
+                                                    "initiatives": []
+                                                },
+                                                {
+                                                    "id": 11,
+                                                    "name": "Projeto de estrutura e governança para análise de dados",
+                                                    "description": null,
+                                                    "order": 11,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:08:52.000Z",
+                                                    "updatedAt": "2023-09-06T10:08:52.000Z",
+                                                    "initiatives": []
+                                                },
+                                                {
+                                                    "id": 12,
+                                                    "name": "Projetos especiais",
+                                                    "description": null,
+                                                    "order": 12,
+                                                    "course": {
+                                                        "id": 1
+                                                    },
+                                                    "createdAt": "2023-09-06T10:09:02.000Z",
+                                                    "updatedAt": "2023-09-06T10:09:02.000Z",
+                                                    "initiatives": []
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Turmas"],
+                "summary": "Criação de Turma",
+                "description": "Criar uma turma",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome da turma"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "status da turma"
+                                    },
+                                    "courseId": {
+                                        "type": "integer",
+                                        "description": "Identificação do curso"
+                                    },
+                                    "studentQuantity": {
+                                        "type": "integer",
+                                        "description": "Quantidade de estudantes na turma"
+                                    },
+                                    "currentModuleId": {
+                                        "type": "string",
+                                        "description": "Identificação do módulo atual da turma"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 10,
+                                    "name": "Turma 03 - 2023.1",
+                                    "status": "CURRENT",
+                                    "studentQuantity": 46,
+                                    "currentModuleId": 3,
+                                    "courseId": 5,
+                                    "createdAt": "2023-09-06T14:32:17.000Z",
+                                    "updatedAt": "2023-09-06T14:32:17.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/classes/{id}": {
+            "patch": {
+                "tags": ["Turmas"],
+                "summary": "Edição de turma",
+                "description": "Edita apenas os campos enviados de uma turma",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da turma a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome da turma"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "status da turma"
+                                    },
+                                    "courseId": {
+                                        "type": "integer",
+                                        "description": "Identificação do curso"
+                                    },
+                                    "studentQuantity": {
+                                        "type": "integer",
+                                        "description": "Quantidade de estudantes na turma"
+                                    },
+                                    "currentModuleId": {
+                                        "type": "string",
+                                        "description": "Identificação do módulo atual da turma"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 10,
+                                    "name": "Turma 03 - 2023.1",
+                                    "status": "CURRENT",
+                                    "studentQuantity": 46,
+                                    "currentModuleId": 3,
+                                    "courseId": 5,
+                                    "createdAt": "2023-09-06T14:32:17.000Z",
+                                    "updatedAt": "2023-09-06T14:32:17.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Turmas"],
+                "summary": "Deletar uma turma",
+                "description": "Deleta uma turma específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da turma a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/teachers": {
+            "get": {
+                "tags": ["Professores"],
+                "summary": "Listagem de Professores",
+                "description": "Retorna uma lista de professors",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 4,
+                                            "name": "Professor Teste",
+                                            "email": "teste@inteli.edu.br",
+                                            "observation": null,
+                                            "createdAt": "2023-09-18T15:49:04.000Z",
+                                            "updatedAt": "2023-09-18T15:49:04.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Professores"],
+                "summary": "Criação de Professor",
+                "description": "Criar uma professor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do professor"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "status do professor"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "observação do professor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 10,
+                                    "name": "Professor 03 - 2023.1",
+                                    "status": "CURRENT",
+                                    "studentQuantity": 46,
+                                    "currentModuleId": 3,
+                                    "courseId": 5,
+                                    "createdAt": "2023-09-06T14:32:17.000Z",
+                                    "updatedAt": "2023-09-06T14:32:17.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/teachers/{id}": {
+            "patch": {
+                "tags": ["Professores"],
+                "summary": "Edição de professor",
+                "description": "Edita apenas os campos enviados de uma professor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do professor a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do professor"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "description": "status do professor"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "observação do professor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 10,
+                                    "name": "Professor 03 - 2023.1",
+                                    "status": "CURRENT",
+                                    "studentQuantity": 46,
+                                    "currentModuleId": 3,
+                                    "courseId": 5,
+                                    "createdAt": "2023-09-06T14:32:17.000Z",
+                                    "updatedAt": "2023-09-06T14:32:17.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Professores"],
+                "summary": "Deletar uma professor",
+                "description": "Deleta uma professor específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do professor a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/companies": {
+            "get": {
+                "tags": ["Empresas"],
+                "summary": "Listagem de Empresas",
+                "description": "Retorna uma lista de empresas",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "activity",
+                        "in": "query",
+                        "description": "Pesquisar por atividade",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sector",
+                        "in": "query",
+                        "description": "Pesquisar pelo setor",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "branch",
+                        "in": "query",
+                        "description": "Pesquisar por ramo",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Pesquisar por tamanho",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "BTG pactual",
+                                            "sector": "Privado",
+                                            "branch": "Serviços",
+                                            "activity": "Financeiro",
+                                            "size": "Grande porte",
+                                            "observation": null,
+                                            "email": "contato@btg.com.br",
+                                            "password": "aaa",
+                                            "passwordSalt": "aaa",
+                                            "avatar": {
+                                                "file": {
+                                                    "id": null
+                                                }
+                                            },
+                                            "createdAt": "2023-09-06T15:51:33.000Z",
+                                            "updatedAt": "2023-09-22T01:56:38.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Empresas"],
+                "summary": "Criação de Professor",
+                "description": "Criar uma empresa",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome da empresa"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email da empresa"
+                                    },
+                                    "sector": {
+                                        "type": "string",
+                                        "description": "Setor da empresa"
+                                    },
+                                    "branch": {
+                                        "type": "string",
+                                        "description": "Ramo da empresa"
+                                    },
+                                    "activity": {
+                                        "type": "string",
+                                        "description": "Atividade da empresa"
+                                    },
+                                    "size": {
+                                        "type": "string",
+                                        "description": "Tamanho da empresa"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Obsevação da empresa"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "Senha da empresa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 47,
+                                    "name": "Empresa x",
+                                    "sector": "privado",
+                                    "branch": "branch",
+                                    "activity": "atividade",
+                                    "size": "gg",
+                                    "observation": null,
+                                    "email": "rararara@gmail.com",
+                                    "password": "opa",
+                                    "passwordSalt": "",
+                                    "avatar": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "createdAt": "2023-09-26T23:11:00.000Z",
+                                    "updatedAt": "2023-09-26T23:11:00.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/companies/{id}": {
+            "patch": {
+                "tags": ["Empresas"],
+                "summary": "Edição de empresa",
+                "description": "Edita apenas os campos enviados de uma empresa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da empresa a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome da empresa"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email da empresa"
+                                    },
+                                    "sector": {
+                                        "type": "string",
+                                        "description": "Setor da empresa"
+                                    },
+                                    "branch": {
+                                        "type": "string",
+                                        "description": "Ramo da empresa"
+                                    },
+                                    "activity": {
+                                        "type": "string",
+                                        "description": "Atividade da empresa"
+                                    },
+                                    "size": {
+                                        "type": "string",
+                                        "description": "Tamanho da empresa"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Obsevação da empresa"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "Senha da empresa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 47,
+                                    "name": "Empresa x",
+                                    "sector": "privado",
+                                    "branch": "branch",
+                                    "activity": "atividade",
+                                    "size": "gg",
+                                    "observation": null,
+                                    "email": "rararara@gmail.com",
+                                    "password": "opa",
+                                    "passwordSalt": "",
+                                    "avatar": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "createdAt": "2023-09-26T23:11:00.000Z",
+                                    "updatedAt": "2023-09-26T23:11:00.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Empresas"],
+                "summary": "Deletar uma empresa",
+                "description": "Deleta uma empresa específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da empresa a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Listagem de Users",
+                "description": "Retorna uma lista de empresas",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filtrar por nome exato",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Pesquisar por nome",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Ordenar resultados",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paginationPageSize",
+                        "in": "query",
+                        "description": "Itens por página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginationPage",
+                        "in": "query",
+                        "description": "Número da página",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "qt": 1,
+                                    "page": 1,
+                                    "pageSize": 30,
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "oi",
+                                            "email": "email aqui",
+                                            "password": "senha",
+                                            "passwordSalt": "hash",
+                                            "createdAt": "2023-09-06T06:57:33.000Z",
+                                            "updatedAt": "2023-09-06T06:57:33.000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users"],
+                "summary": "Criação de Usuário",
+                "description": "Criar um usuário",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do usuário"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email do usuário"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Obsevação do usuário"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "Senha do usuário"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 47,
+                                    "name": "Empresa x",
+                                    "sector": "privado",
+                                    "branch": "branch",
+                                    "activity": "atividade",
+                                    "size": "gg",
+                                    "observation": null,
+                                    "email": "rararara@gmail.com",
+                                    "password": "opa",
+                                    "passwordSalt": "",
+                                    "avatar": {
+                                        "file": {
+                                            "id": null
+                                        }
+                                    },
+                                    "createdAt": "2023-09-26T23:11:00.000Z",
+                                    "updatedAt": "2023-09-26T23:11:00.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "patch": {
+                "tags": ["Users"],
+                "summary": "Edição de usuário",
+                "description": "Edita apenas os campos enviados de um usuário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Nome do usuário"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email do usuário"
+                                    },
+                                    "observation": {
+                                        "type": "string",
+                                        "description": "Obsevação do usuário"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "Senha do usuário"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 2,
+                                    "name": "teste",
+                                    "email": "rrara@gmail.com",
+                                    "password": "adas",
+                                    "passwordSalt": "",
+                                    "createdAt": "2023-09-26T23:57:38.000Z",
+                                    "updatedAt": "2023-09-26T23:57:38.000Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Users"],
+                "summary": "Deletar um usuário",
+                "description": "Deleta um usuário específico do banco de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "servers": [
+        {
+            "description": "SwaggerHub API Auto Mocking",
+            "url": "https://virtserver.swaggerhub.com/RAFAELTECHIO/OMP/1.0.0"
+        }
+    ]
+}
